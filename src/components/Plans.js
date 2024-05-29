@@ -1,28 +1,28 @@
 import React from 'react';
 import './Plans.scss';
 
-const Plans = () => {
+function Plans() {
   return (
     <div className="plans-page">
       <h1>Our Plans</h1>
       <div className="plans">
         <div className="plan-card">
-          <h3>Basic Plan</h3>
+          <h3>Basic</h3>
+          <p className="price">$9.99/month</p>
           <p>Monitor up to 5 services.</p>
-          <p className="price">$5/month</p>
-          <button>Sign Up</button>
+          <button>Choose Plan</button>
         </div>
         <div className="plan-card">
-          <h3>Pro Plan</h3>
-          <p>Monitor up to 15 services.</p>
-          <p className="price">$15/month</p>
-          <button>Sign Up</button>
+          <h3>Standard</h3>
+          <p className="price">$19.99/month</p>
+          <p>Monitor up to 10 services.</p>
+          <button>Choose Plan</button>
         </div>
         <div className="plan-card">
-          <h3>Enterprise Plan</h3>
-          <p>Monitor up to 50 services.</p>
-          <p className="price">$50/month</p>
-          <button>Sign Up</button>
+          <h3>Premium</h3>
+          <p className="price">$29.99/month</p>
+          <p>Monitor up to 20 services.</p>
+          <button>Choose Plan</button>
         </div>
       </div>
     </div>

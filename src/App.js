@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import Dashboard from './components/Dashboard';
+import './styles/main.scss';
 
 function App() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Router>
+      <header>
+        ServiceWatcher 
       </header>
-    </div>
+      <div className="container">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<LandingPage />} />
+        </Routes>
+      </div>
+      <footer>
+        &copy; {currentYear} ServiceWatcher. Todos os direitos reservados.
+      </footer>
+    </Router>
   );
 }
 

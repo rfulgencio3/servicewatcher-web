@@ -35,9 +35,10 @@ const SignUp = () => {
                 />
                 <label>Choose Plan</label>
                 <select value={plan} onChange={(e) => setPlan(e.target.value)}>
-                    <option value="Basic">Basic - $10/month</option>
-                    <option value="Pro">Pro - $25/month</option>
-                    <option value="Enterprise">Enterprise - $50/month</option>
+                    <option value="Free">Free - 7-days trial</option>
+                    <option value="Basic">Basic - $5/month</option>
+                    <option value="Pro">Pro - $10/month</option>
+                    <option value="Enterprise">Enterprise - $25/month</option>
                 </select>
                 <button type="submit">Sign Up</button>
             </form>

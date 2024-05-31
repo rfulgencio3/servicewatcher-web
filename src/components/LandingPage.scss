@@ -1,4 +1,3 @@
-/* src/components/LandingPage.scss */
 @import '../styles/_variables';
 
 .landing-page {
@@ -74,6 +73,7 @@
 
 .landing-page .plans {
   display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next line if needed */
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -81,11 +81,11 @@
 .landing-page .plan-card {
   background-color: white;
   border: 1px solid #dee2e6;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   text-align: left;
-  width: 300px;
+  width: 280px;
 }
 
 .landing-page .plan-card h3 {
@@ -100,6 +100,12 @@
 .landing-page .plan-card .price {
   font-size: 2rem;
   color: $secondary-color;
+  margin-bottom: 1rem;
+}
+
+.landing-page .plan-card .price-per-service {
+  font-size: 1rem;
+  color: $dark-color;
   margin-bottom: 1rem;
 }
 

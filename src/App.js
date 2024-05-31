@@ -5,9 +5,9 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
-import Plans from './components/Plans';
+import About from './components/About'
 import './styles/main.scss';
-import logo from './assets/images/logo.png';
+import logo from './assets/images/logo.png'; // Importe a imagem da logo
 
 function App() {
   const currentYear = new Date().getFullYear();
@@ -15,10 +15,12 @@ function App() {
   return (
     <Router>
       <header>
-        <img src={logo} alt="ServiceWatcher Logo" className="logo" />
+        <Link to="/">
+          <img src={logo} alt="ServiceWatcher Logo" className="logo" />
+        </Link>
         <nav>
+          <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/plans">Plans</Link>
           <Link to="/signup">SignUp</Link>
           <Link to="/login">Login</Link>
         </nav>
@@ -28,13 +30,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/plans" element={<Plans />} />
           <Route path="/" element={<LandingPage />} />
         </Routes>
       </div>
       <footer>
-        &copy; {currentYear} ServiceWatcher. Todos os direitos reservados.
+        &copy; {currentYear} ServiceWatcher. All rights reserved.
       </footer>
     </Router>
   );

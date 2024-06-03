@@ -1,0 +1,114 @@
+@import '../styles/_variables';
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  background-color: $light-color;
+  color: $dark-color;
+  padding: 2rem;
+}
+
+.landing-page h1 {
+  font-size: 3rem;
+  color: $primary-color;
+  margin-bottom: 1rem;
+}
+
+.landing-page p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.landing-page .buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.landing-page .buttons a {
+  text-decoration: none;
+}
+
+.landing-page .buttons button {
+  background-color: $secondary-color; /* Verde */
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.landing-page .buttons button:hover {
+  background-color: darken($secondary-color, 10%);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.landing-page .buttons button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
+}
+
+.landing-page .buttons .signup-btn {
+  background-color: $tertiary-color; /* Laranja */
+}
+
+.landing-page .buttons .signup-btn:hover {
+  background-color: darken($tertiary-color, 10%);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.landing-page .buttons .signup-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($tertiary-color, 0.5);
+}
+
+.landing-page .plans {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next line if needed */
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.landing-page .plan-card {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: left;
+  width: 280px;
+}
+
+.landing-page .plan-card h3 {
+  color: $primary-color;
+  margin-bottom: 1rem;
+}
+
+.landing-page .plan-card p {
+  margin-bottom: 1rem;
+}
+
+.landing-page .plan-card .price {
+  font-size: 2rem;
+  color: $secondary-color;
+  margin-bottom: 1rem;
+}
+
+.landing-page .plan-card .price-per-service {
+  font-size: 1rem;
+  color: $dark-color;
+  margin-bottom: 1rem;
+}
+
+.landing-page .plan-card .signup-btn {
+  width: 100%;
+}

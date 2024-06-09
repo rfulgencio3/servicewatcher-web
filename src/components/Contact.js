@@ -7,6 +7,8 @@ const Contact = () => {
     email: '',
     message: '',
   });
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,10 +18,32 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    try {
+      const response = await fetch('https://servicewatcher-mailservice.azurewebsites.net/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'contact@servicewatcher.net',
+          subject: `Contact Form Submission from ${formData.name}`,
+          body: `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`,
+        }),
+      });
+
+      if (response.ok) {
+        setSuccess(true);
+        setError(false);
+      } else {
+        setSuccess(false);
+        setError(true);
+      }
+    } catch (error) {
+      setSuccess(false);
+      setError(true);
+    }
   };
 
   return (
@@ -33,6 +57,7 @@ const Contact = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
+          required
         />
         <label htmlFor="email">Email</label>
         <input
@@ -41,6 +66,7 @@ const Contact = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
+          required
         />
         <label htmlFor="message">Message</label>
         <textarea
@@ -48,8 +74,11 @@ const Contact = () => {
           name="message"
           value={formData.message}
           onChange={handleChange}
+          required
         />
         <button type="submit">Send Message</button>
+        {success && <p className="success">Email sent successfully!</p>}
+        {error && <p className="error">Failed to send email. Please try again later.</p>}
       </form>
     </div>
   );

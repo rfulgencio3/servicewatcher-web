@@ -5,7 +5,8 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
-import About from './components/About'
+import About from './components/About';
+import NotFound from './components/NotFound'; // Importando o componente NotFound
 import './styles/main.scss';
 import logo from './assets/images/logo.png'; // Importe a imagem da logo
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/" element={<LandingPage />} />
+          <Route path="*" element={<NotFound />} /> {}
         </Routes>
       </div>
       <footer>

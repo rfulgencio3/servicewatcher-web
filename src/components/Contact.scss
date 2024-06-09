@@ -9,6 +9,16 @@
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
+  @media (max-width: 768px) {
+    padding: 1rem;
+    h2 {
+      font-size: 1.5rem;
+    }
+    form label {
+      margin-top: 0.5rem;
+    }
+  }
+
   h2 {
     text-align: center;
     color: $primary-color;
@@ -42,6 +52,11 @@
       transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       font-size: 1rem;
+
+      @media (max-width: 768px) {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+      }
     }
 
     button:hover {

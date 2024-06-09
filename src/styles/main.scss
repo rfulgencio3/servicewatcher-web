@@ -46,6 +46,34 @@ header {
         background-color: darken($primary-color, 10%);
       }
     }
+
+    @media (max-width: 768px) {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background-color: $primary-color;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+
+      &.open {
+        display: flex;
+      }
+    }
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
   }
 }
 

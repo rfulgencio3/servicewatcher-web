@@ -10,6 +10,16 @@
   background-color: $light-color;
   color: $dark-color;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
 }
 
 .about-page h1 {
@@ -45,6 +55,11 @@
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
 }
 
 .about-page .back-btn:hover {

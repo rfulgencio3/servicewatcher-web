@@ -11,7 +11,7 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://servicewatcher-authservice.azurewebsites.net/api/auth/registrer', {
+      const response = await fetch('https://servicewatcher-authservice.azurewebsites.net/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

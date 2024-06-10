@@ -1,4 +1,3 @@
-/* src/components/SignUp.scss */
 @import '../styles/_variables';
 
 .sign-up {
@@ -26,8 +25,7 @@
   color: $dark-color;
 }
 
-.sign-up form input,
-.sign-up form select {
+.sign-up form input {
   padding: 0.5rem;
   margin-top: 0.5rem;
   border: 1px solid #ced4da;

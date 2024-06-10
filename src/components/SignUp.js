@@ -3,47 +3,63 @@ import { useNavigate } from 'react-router-dom';
 import './SignUp.scss';
 
 const SignUp = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [plan, setPlan] = useState('Basic');
-    const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    const handleSignUp = async (e) => {
-        e.preventDefault();
-        // Chamar a API para registrar o usuário
-        // await api.registerUser({ email, password, plan });
-        navigate('/dashboard');
-    };
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://servicewatcher-authservice.azurewebsites.net/api/auth/registrer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-    return (
-        <div className="sign-up">
-            <h2>Sign Up</h2>
-            <form onSubmit={handleSignUp}>
-                <label>Email</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <label>Password</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <label>Choose Plan</label>
-                <select value={plan} onChange={(e) => setPlan(e.target.value)}>
-                    <option value="Free">Free - 7-days trial</option>
-                    <option value="Basic">Basic - $5/month</option>
-                    <option value="Pro">Pro - $10/month</option>
-                    <option value="Enterprise">Enterprise - $25/month</option>
-                </select>
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-    );
+      if (response.ok) {
+        // Redirecionar para a tela de escolha de plano
+        navigate('/choose-plan');
+      } else {
+        alert('Failed to register. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to register. Please try again.');
+    }
+  };
+
+  return (
+    <div className="sign-up">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSignUp}>
+        <label>Name</label>
+        <input
+          type="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label>Password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  );
 };
 
 export default SignUp;

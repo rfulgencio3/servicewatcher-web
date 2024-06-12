@@ -8,109 +8,121 @@
   border-radius: 5px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-.sign-up h2 {
-  text-align: center;
-  color: $primary-color;
-}
+  @media (max-width: 768px) {
+    padding: 1rem;
+    h2 {
+      font-size: 2rem;
+    }
+  }
 
-.sign-up form {
-  display: flex;
-  flex-direction: column;
-}
+  h2 {
+    text-align: center;
+    color: $primary-color;
+  }
 
-.sign-up form label {
-  margin-top: 1rem;
-  color: $dark-color;
-}
+  form {
+    display: flex;
+    flex-direction: column;
 
-.sign-up form input {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  width: 100%;
-}
+    label {
+      margin-top: 1rem;
+      color: $dark-color;
+    }
 
-.password-container {
-  position: relative;
-}
+    input {
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      width: 100%;
+    }
 
-.password-container input {
-  width: calc(100% - 30px); /* Adjust input width to make room for the icon */
-}
+    .password-container {
+      position: relative;
 
-.password-toggle-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: $dark-color;
-}
+      input {
+        width: calc(100% - 30px);
+      }
 
-.sign-up form button {
-  background-color: $secondary-color;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
-}
+      .password-toggle-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: $dark-color;
+      }
+    }
 
-.sign-up form button:hover {
-  background-color: darken($secondary-color, 10%);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
+    button {
+      background-color: $secondary-color;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
 
-.sign-up form button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
-}
+      @media (max-width: 768px) {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+      }
+    }
 
-.error-message {
-  color: red;
-  margin-top: 0.5rem;
-}
+    button:hover {
+      background-color: darken($secondary-color, 10%);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
 
-.error-modal {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
+    }
 
-.error-modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
+    .error-message {
+      color: red;
+      margin-top: 0.5rem;
+    }
+  }
 
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+  .error-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+  .error-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
 }

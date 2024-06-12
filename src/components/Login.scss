@@ -1,4 +1,3 @@
-/* src/components/Login.scss */
 @import '../styles/_variables';
 
 .login {
@@ -9,50 +8,62 @@
   border-radius: 5px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-.login h2 {
-  text-align: center;
-  color: $primary-color;
-}
+  @media (max-width: 768px) {
+    padding: 1rem;
+    h2 {
+      font-size: 2rem;
+    }
+  }
 
-.login form {
-  display: flex;
-  flex-direction: column;
-}
+  h2 {
+    text-align: center;
+    color: $primary-color;
+  }
 
-.login form label {
-  margin-top: 1rem;
-  color: $dark-color;
-}
+  form {
+    display: flex;
+    flex-direction: column;
 
-.login form input {
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-}
+    label {
+      margin-top: 1rem;
+      color: $dark-color;
+    }
 
-.login form button {
-  background-color: $tertiary-color; /* Laranja */
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
-}
+    input {
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+    }
 
-.login form button:hover {
-  background-color: darken($tertiary-color, 10%);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
+    button {
+      background-color: $tertiary-color;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
 
-.login form button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba($tertiary-color, 0.5);
+      @media (max-width: 768px) {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    button:hover {
+      background-color: darken($tertiary-color, 10%);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($tertiary-color, 0.5);
+    }
+  }
 }

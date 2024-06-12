@@ -11,6 +11,16 @@
   color: $dark-color;
   padding: 2rem;
 
+  @media (max-width: 768px) {
+    padding: 1rem;
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
   h1 {
     font-size: 3rem;
     color: $primary-color;
@@ -23,7 +33,7 @@
   }
 
   .back-btn {
-    background-color: $secondary-color; /* Verde */
+    background-color: $secondary-color;
     color: white;
     border: none;
     padding: 0.75rem 2rem;
@@ -32,6 +42,11 @@
     font-size: 1.25rem;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
 
     &:hover {
       background-color: darken($secondary-color, 10%);

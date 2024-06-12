@@ -8,6 +8,13 @@
   border-radius: 5px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    h2 {
+      font-size: 2rem;
+    }
+  }
 }
 
 .choose-plan h2 {
@@ -27,6 +34,10 @@
   border: 1px solid #ced4da;
   border-radius: 5px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
 }
 
 .plan h3 {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Login from './components/Login';
@@ -12,7 +12,12 @@ import './styles/main.scss';
 import logo from './assets/images/logo.png';
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const currentYear = new Date().getFullYear();
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
     <Router>
@@ -20,12 +25,15 @@ function App() {
         <Link to="/">
           <img src={logo} alt="ServiceWatcher Logo" className="logo" />
         </Link>
-        <nav>
+        <nav className={menuOpen ? 'open' : ''}>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/signup">SignUp</Link>
           <Link to="/login">Login</Link>
         </nav>
+        <button className="menu-toggle" onClick={toggleMenu}>
+          ☰
+        </button>
       </header>
       <div className="container">
         <Routes>

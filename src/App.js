@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-import Dashboard from './components/Dashboard';
 import Contact from './components/Contact';
 import About from './components/About';
 import NotFound from './components/NotFound';
 import ChoosePlan from './components/ChoosePlan';
+import UserDashboard from './components/UserDashboard';
 import './styles/main.scss';
 import logo from './assets/images/logo.png';
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const currentYear = new Date().getFullYear();
+  const [user, setUser] = useState(null);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
   };
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <Router>
@@ -25,24 +34,30 @@ function App() {
         <Link to="/">
           <img src={logo} alt="ServiceWatcher Logo" className="logo" />
         </Link>
-        <nav className={menuOpen ? 'open' : ''}>
+        <nav>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/signup">SignUp</Link>
-          <Link to="/login">Login</Link>
+          {!user ? (
+            <>
+              <Link to="/signup">SignUp</Link>
+              <Link to="/login">Login</Link>
+            </>
+          ) : (
+            <>
+              <span>Hello, {user.email}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          )}
         </nav>
-        <button className="menu-toggle" onClick={toggleMenu}>
-          ☰
-        </button>
       </header>
       <div className="container">
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/choose-plan" element={<ChoosePlan />} />
+          <Route path="/choose-plan" element={user ? <ChoosePlan /> : <Login setUser={setUser} />} />
+          <Route path="/user-dashboard" element={user ? <UserDashboard user={user} /> : <Login setUser={setUser} />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

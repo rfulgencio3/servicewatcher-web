@@ -1,0 +1,68 @@
+@import '../styles/_variables';
+
+.user-dashboard {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  .welcome-section {
+    margin-bottom: 2rem;
+
+    h2 {
+      color: $primary-color;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $dark-color;
+      font-size: 1.1rem;
+    }
+  }
+
+  .dashboard-links {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+
+    .dashboard-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: $secondary-color;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 40%;
+      text-align: center;
+
+      .link-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .link-text {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      &:hover {
+        background-color: darken($secondary-color, 10%);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
+      }
+    }
+  }
+}

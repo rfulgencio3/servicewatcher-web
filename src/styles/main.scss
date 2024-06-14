@@ -33,13 +33,28 @@ header {
 
   nav {
     display: flex;
+    align-items: center;
     gap: 1rem;
 
-    a {
+    a, span {
       color: #fff;
       text-decoration: none;
       padding: 0.5rem 1rem;
       border-radius: 5px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
       transition: background-color 0.3s;
 
       &:hover {

@@ -20,6 +20,21 @@ function App() {
     if (storedUser) {
       setUser(storedUser);
     }
+
+    const handleScroll = () => {
+      const header = document.getElementById('myHeader');
+      const sticky = header.offsetTop;
+      if (window.pageYOffset > sticky) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -31,7 +46,7 @@ function App() {
 
   return (
     <Router>
-      <header>
+      <header id="myHeader">
         <Link to="/">
           <img src={logo} alt="ServiceWatcher Logo" className="logo" />
         </Link>

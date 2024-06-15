@@ -19,16 +19,17 @@ body {
 }
 
 header {
-  background-color: $primary-color; /* Azul */
+  background-color: $primary-color;
   color: #fff;
   padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+  transition: all 0.3s;
+
   .logo {
-    height: 60px; /* Ajuste a altura conforme necessário */
-    width: auto;  /* Ajusta a largura automaticamente para manter a proporção */
+    height: 60px;
+    width: auto;
   }
 
   nav {
@@ -92,13 +93,24 @@ header {
   }
 }
 
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.sticky + .container {
+  padding-top: 102px;
+}
+
 .container {
-  flex: 1; /* Faz o container crescer para ocupar o espaço disponível */
+  flex: 1;
   padding: 2rem;
 }
 
 button {
-  background-color: $secondary-color; /* Verde */
+  background-color: $secondary-color;
   color: #fff;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -121,10 +133,10 @@ button:focus {
 }
 
 footer {
-  background-color: lighten($secondary-color, 20%); /* Verde claro */
+  background-color: lighten($secondary-color, 20%);
   color: white;
   text-align: center;
-  padding: 0.5rem; /* Reduzindo o padding */
+  padding: 0.5rem;
   position: relative;
   bottom: 0;
   width: 100%;

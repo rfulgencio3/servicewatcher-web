@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './SignUp.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import './SignUp.scss';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -77,7 +77,7 @@ const SignUp = () => {
         <label>Password</label>
         <div className="password-container">
           <input
-            type={passwordVisible ? "text" : "password"}
+            type={passwordVisible ? 'text' : 'password'}
             value={password}
             onChange={handlePasswordChange}
             required
@@ -89,7 +89,7 @@ const SignUp = () => {
         <label>Confirm Password</label>
         <div className="password-container">
           <input
-            type={passwordVisible ? "text" : "password"}
+            type={passwordVisible ? 'text' : 'password'}
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
             required

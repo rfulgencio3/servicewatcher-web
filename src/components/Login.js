@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './Login.scss';
 
 const Login = ({ setUser }) => {
@@ -7,6 +9,7 @@ const Login = ({ setUser }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -46,6 +49,10 @@ const Login = ({ setUser }) => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <div className="login">
       {loading && <div className="loading-overlay"><span className="loader"></span></div>}
@@ -59,12 +66,17 @@ const Login = ({ setUser }) => {
           required
         />
         <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div className="password-container">
+          <input
+            type={passwordVisible ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
+            <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
+          </span>
+        </div>
         {error && <p className="error-message">{error}</p>}
         <button type="submit" disabled={loading}>Login</button>
       </form>

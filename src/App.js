@@ -8,6 +8,7 @@ import About from './components/About';
 import NotFound from './components/NotFound';
 import ChoosePlan from './components/ChoosePlan';
 import UserDashboard from './components/UserDashboard';
+import PlanInfo from './components/PlanInfo';
 import './styles/main.scss';
 import logo from './assets/images/logo.png';
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/choose-plan" element={user ? <ChoosePlan /> : <Login setUser={setUser} />} />
           <Route path="/user-dashboard" element={user ? <UserDashboard user={user} /> : <Login setUser={setUser} />} />
+          <Route path="/plan-info" element={user ? <PlanInfo user={user} /> : <Login setUser={setUser} />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

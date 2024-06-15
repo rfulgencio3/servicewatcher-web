@@ -8,7 +8,7 @@ import About from './components/About';
 import NotFound from './components/NotFound';
 import ChoosePlan from './components/ChoosePlan';
 import UserDashboard from './components/UserDashboard';
-import PlanInfo from './components/PlanInfo';
+import PlanInfo from './components/PlanInfo'; // Import PlanInfo
 import './styles/main.scss';
 import logo from './assets/images/logo.png';
 
@@ -45,6 +45,7 @@ function App() {
             </>
           ) : (
             <>
+              <Link to="/user-dashboard">My Dashboard</Link>
               <span>Hello, {user.email}</span>
               <button onClick={handleLogout}>Logout</button>
             </>

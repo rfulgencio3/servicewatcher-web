@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PlanInfo.scss';
 
 const PlanInfo = ({ user }) => {
   const [planInfo, setPlanInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlanInfo = async () => {
@@ -45,11 +47,21 @@ const PlanInfo = ({ user }) => {
   }
 
   if (error) {
-    return <div className="error-message">{error}</div>;
+    return (
+      <div className="error-container">
+        <div className="error-message">{error}</div>
+        <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
+      </div>
+    );
   }
 
   if (!planInfo || planInfo.length === 0) {
-    return <div className="no-plan-info">No plan information available.</div>;
+    return (
+      <div className="error-container">
+        <div className="no-plan-info">No plan information available.</div>
+        <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
+      </div>
+    );
   }
 
   return (
@@ -66,6 +78,7 @@ const PlanInfo = ({ user }) => {
           </div>
         ))}
       </div>
+      <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
     </div>
   );
 };

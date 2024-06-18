@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './PlanInfo.scss';
 
 const PlanInfo = ({ user }) => {
   const [planInfo, setPlanInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlanInfo = async () => {
@@ -48,9 +46,9 @@ const PlanInfo = ({ user }) => {
 
   if (error) {
     return (
-      <div className="error-container">
-        <div className="error-message">{error}</div>
-        <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
+      <div className="error-message">
+        {error}
+        <button onClick={() => window.location.href = '/user-dashboard'}>Back to Dashboard</button>
       </div>
     );
   }
@@ -73,12 +71,11 @@ const PlanInfo = ({ user }) => {
             <h3>{plan.planName}</h3>
             <p>{plan.description}</p>
             <p>Price: ${plan.price}</p>
-            <p>Start Date: {new Date(plan.startDate).toLocaleDateString()}</p>
-            <p>End Date: {new Date(plan.endDate).toLocaleDateString()}</p>
+            <p>Start Date: {plan.startDate ? new Date(plan.startDate).toLocaleDateString() : 'N/A'}</p>
+            <p>End Date: {plan.endDate ? new Date(plan.endDate).toLocaleDateString() : 'N/A'}</p>
           </div>
         ))}
       </div>
-      <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
     </div>
   );
 };

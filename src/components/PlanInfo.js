@@ -67,24 +67,36 @@ const PlanInfo = ({ user }) => {
   return (
     <div className="plan-info">
       <h2>Plan Information</h2>
-      <div className="plan-details">
-        {planInfo.map((plan, index) => {
-          const isActive = new Date(plan.endDate) > new Date();
-          return (
-            <div key={index} className={`plan-card ${isActive ? 'active' : 'inactive'}`}>
-              <div className="plan-header">
-                <h3>{plan.planName}</h3>
-                <div className="plan-price">${plan.planPrice}</div>
-              </div>
-              <p className="plan-description">{plan.planDescription}</p>
-              <p>Start Date: {new Date(plan.startDate).toLocaleDateString()}</p>
-              <p>End Date: {new Date(plan.endDate).toLocaleDateString()}</p>
-              <p className={`plan-status ${isActive ? 'active' : 'inactive'}`}>
-                {isActive ? 'Active' : 'Inactive'}
-              </p>
-            </div>
-          );
-        })}
+      <div className="table-container">
+        <table className="plan-table">
+          <thead>
+            <tr>
+              <th>Plan Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {planInfo.map((plan, index) => {
+              const isActive = new Date(plan.endDate) > new Date();
+              return (
+                <tr key={index} className={isActive ? 'active' : 'inactive'}>
+                  <td>{plan.planName}</td>
+                  <td>{plan.planDescription}</td>
+                  <td>${plan.planPrice}</td>
+                  <td>{new Date(plan.startDate).toLocaleDateString()}</td>
+                  <td>{new Date(plan.endDate).toLocaleDateString()}</td>
+                  <td className={`plan-status ${isActive ? 'active' : 'inactive'}`}>
+                    {isActive ? 'Active' : 'Inactive'}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
     </div>

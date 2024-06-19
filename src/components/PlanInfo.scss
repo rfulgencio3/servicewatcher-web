@@ -14,82 +14,50 @@
     margin-bottom: 2rem;
   }
 
-  .plan-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
+  .table-container {
+    overflow-x: auto;
   }
 
-  .plan-card {
-    background-color: white;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    text-align: left;
-    width: 280px;
-    transition: transform 0.3s, box-shadow 0.3s;
+  .plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
 
-    &.active {
+    th, td {
+      padding: 1rem;
+      border: 1px solid #dee2e6;
+    }
+
+    th {
+      background-color: $primary-color;
+      color: white;
+      text-align: left;
+    }
+
+    td {
+      background-color: white;
+    }
+
+    tr.active td {
       border-color: $secondary-color;
     }
 
-    &.inactive {
+    tr.inactive td {
       border-color: red;
     }
 
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    @media (max-width: 768px) {
-      width: 100%;
-      padding: 1rem;
-    }
-
-    .plan-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-
-      h3 {
-        color: $primary-color;
-        margin: 0;
-      }
-
-      .plan-price {
-        font-size: 2rem;
-        color: $secondary-color;
-        margin-bottom: 1rem;
-      }
-    }
-
-    .plan-description {
-      margin-bottom: 1rem;
-    }
-
-    p {
-      margin: 0.5rem 0;
-    }
-
-    .plan-status {
+    .plan-status.active {
+      color: $secondary-color;
       font-weight: bold;
+    }
 
-      &.active {
-        color: $secondary-color;
-      }
-
-      &.inactive {
-        color: red;
-      }
+    .plan-status.inactive {
+      color: red;
+      font-weight: bold;
     }
   }
 
   .back-button {
-    margin-top: 2rem;
     background-color: $secondary-color;
     color: white;
     padding: 0.75rem 1.5rem;

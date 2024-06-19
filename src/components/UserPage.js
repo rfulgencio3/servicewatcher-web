@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './UserDashboard.scss';
+import './UserPage.scss';
 
-const UserDashboard = ({ user }) => {
+const UserPage = ({ user }) => {
   return (
-    <div className="user-dashboard">
+    <div className="user-page">
       <div className="welcome-section">
         <h2>Welcome, {user.name}</h2>
         <p>We're glad to have you back!</p>
@@ -23,4 +23,4 @@ const UserDashboard = ({ user }) => {
   );
 };
 
-export default UserDashboard;
+export default UserPage;

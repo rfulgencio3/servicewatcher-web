@@ -7,8 +7,9 @@ import Contact from './components/Contact';
 import About from './components/About';
 import NotFound from './components/NotFound';
 import ChoosePlan from './components/ChoosePlan';
-import UserDashboard from './components/UserDashboard';
-import PlanInfo from './components/PlanInfo'; // Import PlanInfo
+import UserPage from './components/UserPage';
+import PlanInfo from './components/PlanInfo'; 
+import Dashboard from './components/Dashboard';
 import './styles/main.scss';
 import logo from './assets/images/logo.png';
 
@@ -60,7 +61,7 @@ function App() {
             </>
           ) : (
             <>
-              <Link to="/user-dashboard">My Dashboard</Link>
+              <Link to="/user-page">My Dashboard</Link>
               <span>Hello, {user.email}</span>
               <button onClick={handleLogout}>Logout</button>
             </>
@@ -74,8 +75,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/choose-plan" element={user ? <ChoosePlan /> : <Login setUser={setUser} />} />
-          <Route path="/user-dashboard" element={user ? <UserDashboard user={user} /> : <Login setUser={setUser} />} />
+          <Route path="/user-page" element={user ? <UserPage user={user} /> : <Login setUser={setUser} />} />
           <Route path="/plan-info" element={user ? <PlanInfo user={user} /> : <Login setUser={setUser} />} />
+          <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Login setUser={setUser} />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

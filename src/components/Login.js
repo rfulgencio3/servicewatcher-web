@@ -36,8 +36,8 @@ const Login = ({ setUser }) => {
         // Atualizar o estado global
         setUser({ email, token, name });
 
-        // Redirecionar para o user-dashboard
-        navigate('/user-dashboard');
+        // Redirecionar para o user-page
+        navigate('/user-page');
       } else {
         setError('User or password is incorrect');
       }

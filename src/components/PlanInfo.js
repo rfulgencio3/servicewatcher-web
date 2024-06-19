@@ -50,7 +50,7 @@ const PlanInfo = ({ user }) => {
     return (
       <div className="error-container">
         <div className="error-message">{error}</div>
-        <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
+        <button className="back-button" onClick={() => navigate('/user-page')}>Back to Dashboard</button>
       </div>
     );
   }
@@ -59,7 +59,7 @@ const PlanInfo = ({ user }) => {
     return (
       <div className="error-container">
         <div className="no-plan-info">No plan information available.</div>
-        <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
+        <button className="back-button" onClick={() => navigate('/user-page')}>Back to Dashboard</button>
       </div>
     );
   }
@@ -98,7 +98,7 @@ const PlanInfo = ({ user }) => {
           </tbody>
         </table>
       </div>
-      <button className="back-button" onClick={() => navigate('/user-dashboard')}>Back to Dashboard</button>
+      <button className="back-button" onClick={() => navigate('/user-page')}>Back to Dashboard</button>
     </div>
   );
 };

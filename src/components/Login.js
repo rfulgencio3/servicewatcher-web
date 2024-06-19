@@ -55,7 +55,7 @@ const Login = ({ setUser }) => {
 
   return (
     <div className="login">
-      {loading && <div className="loading-overlay"><span className="loader"></span></div>}
+      {loading && <div className="loading-overlay"><div className="loader"></div></div>}
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <label>Email</label>

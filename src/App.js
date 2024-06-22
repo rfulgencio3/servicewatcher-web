@@ -71,7 +71,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp setUser={setUser} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/choose-plan" element={user ? <ChoosePlan /> : <Login setUser={setUser} />} />

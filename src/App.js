@@ -10,17 +10,46 @@ import ChoosePlan from './components/ChoosePlan';
 import UserPage from './components/UserPage';
 import PlanInfo from './components/PlanInfo'; 
 import Dashboard from './components/Dashboard';
+import ManageServices from './components/ManageServices';
 import './styles/main.scss';
 import logo from './assets/images/logo.png';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [customer, setCustomer] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser);
     }
+
+    const fetchCustomer = async () => {
+      if (storedUser) {
+        try {
+          const response = await fetch(`https://servicewatcher-planservice.azurewebsites.net/api/Customer/email/${encodeURIComponent(storedUser.email)}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${storedUser.token}`,
+            }
+          });
+
+          if (response.ok) {
+            const customerData = await response.json();
+            setCustomer(customerData);
+          } else {
+            setCustomer(null);
+          }
+        } catch (error) {
+          setCustomer(null);
+        }
+      }
+      setLoading(false);
+    };
+
+    fetchCustomer();
 
     const handleScroll = () => {
       const header = document.getElementById('myHeader');
@@ -41,9 +70,14 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUser(null);
+    setCustomer(null);
   };
 
   const currentYear = new Date().getFullYear();
+
+  if (loading) {
+    return <div className="loading-overlay"><div className="loader"></div></div>;
+  }
 
   return (
     <Router>
@@ -74,10 +108,11 @@ function App() {
           <Route path="/signup" element={<SignUp setUser={setUser} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/choose-plan" element={user ? <ChoosePlan /> : <Login setUser={setUser} />} />
+          <Route path="/choose-plan" element={user ? <ChoosePlan user={user} /> : <Login setUser={setUser} />} />
           <Route path="/user-page" element={user ? <UserPage user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/plan-info" element={user ? <PlanInfo user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Login setUser={setUser} />} />
+          <Route path="/plan-info" element={user && customer ? <PlanInfo user={user} /> : <Login setUser={setUser} />} />
+          <Route path="/dashboard" element={user && customer ? <Dashboard user={user} /> : <Login setUser={setUser} />} />
+          <Route path="/manage-services" element={user && customer ? <ManageServices user={user} /> : <Login setUser={setUser} />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

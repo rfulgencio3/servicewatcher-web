@@ -19,17 +19,17 @@ const Dashboard = ({ user }) => {
 
   const fetchCustomer = async () => {
     try {
-      const response = await fetch(`https://servicewatcher-planservice.azurewebsites.net/api/Customer/email/${encodeURIComponent(user.email)}`, {
+      const response = await fetch(`https://servicewatcher-planservice.azurewebsites.net/api/Customer/email`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user.token}`,
+          'email': user.email,
         }
       });
 
       if (response.ok) {
         const customerData = await response.json();
-        console.log("Customer Data:", customerData); // Log the customer data
         setCustomer(customerData);
       } else {
         const errorData = await response.json();
@@ -53,7 +53,6 @@ const Dashboard = ({ user }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(`Data for ${endpoint}:`, data); // Log the data for each endpoint
         setter(data);
       } else if (response.status === 404) {
         setter([]);

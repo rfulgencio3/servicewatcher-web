@@ -23,49 +23,35 @@ function App() {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser);
-    }
-
-    const fetchCustomer = async () => {
-      if (storedUser) {
-        try {
-          const response = await fetch(`https://servicewatcher-planservice.azurewebsites.net/api/Customer/email/${encodeURIComponent(storedUser.email)}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${storedUser.token}`,
-            }
-          });
-
-          if (response.ok) {
-            const customerData = await response.json();
-            setCustomer(customerData);
-          } else {
-            setCustomer(null);
-          }
-        } catch (error) {
-          setCustomer(null);
-        }
-      }
+      fetchCustomer(storedUser);
+    } else {
       setLoading(false);
-    };
-
-    fetchCustomer();
-
-    const handleScroll = () => {
-      const header = document.getElementById('myHeader');
-      const sticky = header.offsetTop;
-      if (window.pageYOffset > sticky) {
-        header.classList.add('sticky');
-      } else {
-        header.classList.remove('sticky');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    }
   }, []);
+
+  const fetchCustomer = async (storedUser) => {
+    try {
+      const response = await fetch(`https://servicewatcher-planservice.azurewebsites.net/api/Customer/email`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${storedUser.token}`,
+          'email': storedUser.email,
+        }
+      });
+
+      if (response.ok) {
+        const customerData = await response.json();
+        setCustomer(customerData);
+      } else {
+        setCustomer(null);
+      }
+    } catch (error) {
+      setCustomer(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -109,10 +95,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/choose-plan" element={user ? <ChoosePlan user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/user-page" element={user ? <UserPage user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/plan-info" element={user && customer ? <PlanInfo user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/dashboard" element={user && customer ? <Dashboard user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/manage-services" element={user && customer ? <ManageServices user={user} /> : <Login setUser={setUser} />} />
+          <Route path="/user-page" element={user ? <UserPage user={user} customer={customer} /> : <Login setUser={setUser} />} />
+          <Route path="/plan-info" element={user ? (customer ? <PlanInfo user={user} /> : <div className="loading-overlay"><div className="loader"></div></div>) : <Login setUser={setUser} />} />
+          <Route path="/dashboard" element={user ? (customer ? <Dashboard user={user} /> : <div className="loading-overlay"><div className="loader"></div></div>) : <Login setUser={setUser} />} />
+          <Route path="/manage-services" element={user ? (customer ? <ManageServices user={user} /> : <div className="loading-overlay"><div className="loader"></div></div>) : <Login setUser={setUser} />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

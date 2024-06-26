@@ -22,11 +22,11 @@ const useCustomer = (user) => {
           setCustomer(customerData);
         } else {
           const errorData = await response.text();
-          console.error('Error fetching customer:', errorData); // Log para depuração
+          console.error('Error fetching customer:', errorData);
           setError('Failed to fetch customer information. Please try again later.');
         }
       } catch (error) {
-        console.error('Fetch error:', error); // Log para depuração
+        console.error('Fetch error:', error);
         setError('Failed to fetch customer information. Please try again later.');
       } finally {
         setLoading(false);

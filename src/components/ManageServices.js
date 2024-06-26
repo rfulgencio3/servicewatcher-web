@@ -13,7 +13,7 @@ const ManageServices = ({ user }) => {
   const navigate = useNavigate();
 
   const planLimits = {
-    'Free Trial': 3,
+    'Free Trial': 1,
     'Basic Plan': 5,
     'Pro Plan': 15,
     'Enterprise Plan': 50,
@@ -25,6 +25,7 @@ const ManageServices = ({ user }) => {
         const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/CustomerPlan', {
           headers: {
             'Authorization': `Bearer ${user.token}`,
+            'email': user.email,
           },
         });
 
@@ -60,7 +61,7 @@ const ManageServices = ({ user }) => {
 
     fetchPlanDetails();
     fetchServices();
-  }, [user.token]);
+  }, [user.token, user.email]);
 
   const handleAddService = async (e) => {
     e.preventDefault();

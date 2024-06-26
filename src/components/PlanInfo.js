@@ -13,12 +13,12 @@ const PlanInfo = ({ user }) => {
       setLoading(true);
       try {
         const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/CustomerPlans/email', {
-          method: 'POST',
+          method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.token}`,
-          },
-          body: JSON.stringify({ email: user.email }),
+            'accept': '*/*',
+            'email': user.email,
+            'Authorization': `Bearer ${user.token}`
+          }
         });
 
         if (response.ok) {
@@ -26,9 +26,10 @@ const PlanInfo = ({ user }) => {
           setPlanInfo(data);
         } else {
           const errorData = await response.json();
-          setError(errorData.message);
+          setError(`Error: ${errorData.message}`);
         }
       } catch (error) {
+        console.error('Error fetching plan information:', error);
         setError('Failed to fetch plan information.');
       } finally {
         setLoading(false);

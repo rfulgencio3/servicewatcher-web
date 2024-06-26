@@ -59,6 +59,11 @@
         outline: none;
         box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
       }
+
+      &:disabled {
+        background-color: lighten($secondary-color, 20%);
+        cursor: not-allowed;
+      }
     }
   }
 

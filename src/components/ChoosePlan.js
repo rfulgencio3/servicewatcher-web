@@ -97,7 +97,14 @@ const ChoosePlan = ({ user }) => {
   return (
     <div className="choose-plan">
       <h2>Choose Your Plan</h2>
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+        <div className="error-modal">
+          <div className="error-modal-content">
+            <span className="close-button" onClick={() => window.location.reload()}>&times;</span>
+            <p>Failed to fetch customer information. Please try again later.</p>
+          </div>
+        </div>
+      )}
       <div className="plan-options">
         <div className="plan-card" onClick={() => handlePlanSelection(1, 7)}>
           <h3>Free Trial</h3>

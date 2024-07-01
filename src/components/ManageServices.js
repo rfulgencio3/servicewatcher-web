@@ -3,13 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import './ManageServices.scss';
 
 const ManageServices = ({ user }) => {
-  const [serviceName, setServiceName] = useState('');
-  const [serviceUrl, setServiceUrl] = useState('');
-  const [description, setDescription] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [services, setServices] = useState([]);
+  const [rows, setRows] = useState([{ url: '', type: '1' }]);
   const [planLimit, setPlanLimit] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const planLimits = {
@@ -21,80 +18,66 @@ const ManageServices = ({ user }) => {
 
   useEffect(() => {
     const fetchPlanDetails = async () => {
+      console.log('fetchPlanDetails called');
       try {
-        const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/CustomerPlan', {
+        const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/CustomerPlans/email', {
           headers: {
-            'Authorization': `Bearer ${user.token}`,
+            'accept': '*/*',
             'email': user.email,
           },
         });
 
+        console.log('Response received:', response);
+
         if (response.ok) {
           const planData = await response.json();
+          console.log('Plan data:', planData);
           setPlanLimit(planLimits[planData.planType] || 0);
         } else {
+          const errorText = await response.text();
+          console.log('Failed to fetch plan details:', errorText);
           setError('Failed to fetch plan details');
         }
       } catch (error) {
+        console.log('Error fetching plan details:', error);
         setError('Error fetching plan details');
       }
     };
 
-    const fetchServices = async () => {
-      try {
-        const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/Services', {
-          headers: {
-            'Authorization': `Bearer ${user.token}`,
-          },
-        });
-
-        if (response.ok) {
-          const servicesData = await response.json();
-          setServices(servicesData);
-        } else {
-          setError('Failed to fetch services');
-        }
-      } catch (error) {
-        setError('Error fetching services');
-      }
-    };
-
     fetchPlanDetails();
-    fetchServices();
-  }, [user.token, user.email]);
+  }, [user.email]);
 
-  const handleAddService = async (e) => {
-    e.preventDefault();
+  const addRow = () => {
+    setRows([...rows, { url: '', type: '1' }]);
+  };
 
-    if (services.length >= planLimit) {
-      setError(`You have reached the limit of ${planLimit} services for your plan.`);
-      return;
-    }
-
+  const handleSave = async () => {
     setLoading(true);
-
     try {
-      const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/Services', {
+      const servicesToSave = rows.map(row => ({
+        ...row,
+        customerId: user.id,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        isActive: true,
+      }));
+
+      const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/Service', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ name: serviceName, url: serviceUrl, description, customerId: user.id }),
+        body: JSON.stringify(servicesToSave),
       });
 
       if (response.ok) {
-        const newService = await response.json();
-        setServices([...services, newService]);
-        setServiceName('');
-        setServiceUrl('');
-        setDescription('');
-        setError('');
+        alert('Services saved successfully!');
       } else {
-        setError('Failed to add service');
+        alert('Failed to save services.');
       }
     } catch (error) {
-      setError('Error adding service');
+      alert('Error saving services.');
     } finally {
       setLoading(false);
     }
@@ -104,44 +87,50 @@ const ManageServices = ({ user }) => {
     <div className="manage-services">
       {loading && <div className="loading-overlay"><div className="loader"></div></div>}
       <h2>Manage Services</h2>
-      <form onSubmit={handleAddService}>
-        <label>Service Name</label>
-        <input
-          type="text"
-          value={serviceName}
-          onChange={(e) => setServiceName(e.target.value)}
-          required
-        />
-        <label>Service URL</label>
-        <input
-          type="url"
-          value={serviceUrl}
-          onChange={(e) => setServiceUrl(e.target.value)}
-          required
-        />
-        <label>Description</label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        {error && <p className="error-message">{error}</p>}
-        <button type="submit" disabled={loading || services.length >= planLimit}>Add Service</button>
-      </form>
-      <div className="services-list">
-        <h3>Your Services</h3>
-        <ul>
-          {services.map((service) => (
-            <li key={service.id}>
-              {service.name} - {service.url}
-            </li>
+      {error && <p className="error-message">{error}</p>}
+      <div className="container">
+        <div className="header">
+          <div>Service URL</div>
+          <div>Type</div>
+          <div>Action</div>
+        </div>
+        <div className="rows-container">
+          {rows.map((row, index) => (
+            <div className="row" key={index}>
+              <input
+                type="url"
+                value={row.url}
+                onChange={(e) => {
+                  const newRows = [...rows];
+                  newRows[index].url = e.target.value;
+                  setRows(newRows);
+                }}
+                placeholder="Enter service URL"
+              />
+              <select
+                value={row.type}
+                onChange={(e) => {
+                  const newRows = [...rows];
+                  newRows[index].type = e.target.value;
+                  setRows(newRows);
+                }}
+              >
+                <option value="1">Website</option>
+                <option value="2">Service</option>
+              </select>
+              {index === rows.length - 1 && rows.length < planLimit && (
+                <button type="button" className="add-button" onClick={addRow}>+</button>
+              )}
+            </div>
           ))}
-        </ul>
-        {services.length < planLimit && (
-          <button className="add-service-button" onClick={handleAddService}>+</button>
-        )}
+        </div>
       </div>
-      <button className="back-button" onClick={() => navigate('/user-page')}>Back to Dashboard</button>
+      <div className="button-container">
+        <button className="save-button" onClick={handleSave} disabled={loading}>
+          Save
+        </button>
+        <button className="back-button" onClick={() => navigate('/user-page')}>Back to Dashboard</button>
+      </div>
     </div>
   );
 };

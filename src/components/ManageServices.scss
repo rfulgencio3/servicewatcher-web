@@ -5,140 +5,73 @@
   margin: 2rem auto;
   padding: 2rem;
   border: 1px solid #dee2e6;
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-family: 'YourFontFamilyName', Arial, sans-serif;
 
   h2 {
     color: $primary-color;
     margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-
-    label {
-      margin-top: 1rem;
-      color: $dark-color;
-    }
-
-    input, textarea {
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border: 1px solid #ced4da;
-      border-radius: 5px;
-      width: 100%;
-    }
-
-    button {
-      background-color: $secondary-color;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      font-size: 1rem;
-
-      @media (max-width: 768px) {
-        font-size: 0.875rem;
-        padding: 0.5rem 1rem;
-      }
-
-      &:hover {
-        background-color: darken($secondary-color, 10%);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        transform: translateY(-2px);
-      }
-
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
-      }
-
-      &:disabled {
-        background-color: lighten($secondary-color, 20%);
-        cursor: not-allowed;
-      }
-    }
+  .container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    display: grid;
+    gap: 15px;
   }
 
-  .services-list {
-    margin-top: 2rem;
-
-    h3 {
-      color: $primary-color;
-      margin-bottom: 1rem;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-
-      li {
-        background-color: #f8f9fa;
-        border: 1px solid #ced4da;
-        border-radius: 5px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-
-    .add-service-button {
-      background-color: $secondary-color;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 2rem auto 0;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-      &:hover {
-        background-color: darken($secondary-color, 10%);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        transform: translateY(-2px);
-      }
-
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
-      }
-    }
+  .header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 100px;
+    font-weight: 600;
+    background-color: $primary-color;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'YourFontFamilyName', Arial, sans-serif;
   }
 
-  .back-button {
+  .rows-container {
+    display: grid;
+    gap: 10px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 100px;
+    align-items: center;
+    gap: 10px;
+  }
+
+  input, select {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: 'YourFontFamilyName', Arial, sans-serif;
+  }
+
+  .add-button {
+    padding: 10px 15px;
+    cursor: pointer;
     background-color: $secondary-color;
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
     border-radius: 5px;
-    cursor: pointer;
-    margin-top: 2rem;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 1rem;
-
-    @media (max-width: 768px) {
-      font-size: 0.875rem;
-      padding: 0.5rem 1rem;
-    }
+    font-size: 1.2rem;
 
     &:hover {
       background-color: darken($secondary-color, 10%);
@@ -149,6 +82,69 @@
     &:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    .save-button {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 0.5rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.5);
+      }
+
+      &:disabled {
+        background-color: lighten($primary-color, 20%);
+        cursor: not-allowed;
+      }
+    }
+
+    .back-button {
+      background-color: $secondary-color;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 0.5rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+
+      &:hover {
+        background-color: darken($secondary-color, 10%);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($secondary-color, 0.5);
+      }
     }
   }
 
@@ -225,5 +221,6 @@
   .error-message {
     color: red;
     margin-top: 0.5rem;
+    font-weight: bold;
   }
 }

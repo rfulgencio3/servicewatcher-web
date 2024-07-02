@@ -123,6 +123,10 @@ const ChoosePlan = ({ user }) => {
           <p>Monitor up to 50 services. $25/month</p>
         </div>
       </div>
+      
+      <div className="back-button-container">
+        <button className="back-button" onClick={() => navigate('/user-page')}>Back to Dashboard</button>
+      </div>
     </div>
   );
 };

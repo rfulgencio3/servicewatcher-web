@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Login from './components/Login';
@@ -13,45 +13,12 @@ import Dashboard from './components/Dashboard';
 import ManageServices from './components/ManageServices';
 import './styles/main.scss';
 import logo from './assets/images/logo.png';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [customer, setCustomer] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { user, customer, loading, logout } = useContext(AuthContext);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-
-    const fetchCustomer = async () => {
-      if (storedUser) {
-        try {
-          const response = await fetch('https://servicewatcher-planservice.azurewebsites.net/api/Customer/email', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${storedUser.token}`,
-              'email': storedUser.email,
-            }
-          });
-
-          if (response.ok) {
-            const customerData = await response.json();
-            setCustomer(customerData);
-          } else {
-            setCustomer(null);
-          }
-        } catch (error) {
-          setCustomer(null);
-        }
-      }
-      setLoading(false);
-    };
-
-    fetchCustomer();
-
     const handleScroll = () => {
       const header = document.getElementById('myHeader');
       const sticky = header.offsetTop;
@@ -67,12 +34,6 @@ function App() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setUser(null);
-    setCustomer(null);
-  };
 
   const currentYear = new Date().getFullYear();
 
@@ -98,22 +59,22 @@ function App() {
             <>
               <Link to="/user-page">My Dashboard</Link>
               <span>Hello, {user.email}</span>
-              <button onClick={handleLogout}>Logout</button>
+              <button onClick={logout}>Logout</button>
             </>
           )}
         </nav>
       </header>
       <div className="container">
         <Routes>
-          <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route path="/signup" element={<SignUp setUser={setUser} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/choose-plan" element={user ? <ChoosePlan user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/user-page" element={user ? <UserPage user={user} /> : <Login setUser={setUser} />} />
-          <Route path="/plan-info" element={user ? (customer ? <PlanInfo user={user} /> : <div className="loading-overlay"><div className="loader"></div></div>) : <Login setUser={setUser} />} />
-          <Route path="/dashboard" element={user ? (customer ? <Dashboard user={user} /> : <div className="loading-overlay"><div className="loader"></div></div>) : <Login setUser={setUser} />} />
-          <Route path="/manage-services" element={user ? (customer ? <ManageServices user={user} /> : <div className="loading-overlay"><div className="loader"></div></div>) : <Login setUser={setUser} />} />
+          <Route path="/choose-plan" element={user ? <ChoosePlan user={user} /> : <Login />} />
+          <Route path="/user-page" element={user ? <UserPage user={user} /> : <Login />} />
+          <Route path="/plan-info" element={user ? <PlanInfo user={user} /> : <Login />} />
+          <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Login />} />
+          <Route path="/manage-services" element={user ? <ManageServices user={user} /> : <Login />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

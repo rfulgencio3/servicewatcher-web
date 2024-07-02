@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useCustomer from '../hooks/useCustomer';
+import { AuthContext } from '../AuthContext';
 import './UserPage.scss';
 
-const UserPage = ({ user }) => {
-  const { customer, loading, error } = useCustomer(user);
+const UserPage = () => {
+  const { user, customer, loading, error } = useContext(AuthContext);
   const [hasPlan, setHasPlan] = useState(false);
 
   useEffect(() => {

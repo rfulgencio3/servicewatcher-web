@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './SignUp.scss';
+import { AuthContext } from '../context/AuthContext';
 
-const SignUp = ({ setUser }) => {
+const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +16,7 @@ const SignUp = ({ setUser }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -84,13 +86,10 @@ const SignUp = ({ setUser }) => {
           const data = await loginResponse.json();
           const { token, name } = data;
 
-          // Store the user data in localStorage
-          localStorage.setItem('user', JSON.stringify({ email, token, name }));
+          // Atualizar o estado global
+          login({ email, token, name });
 
-          // Update global state
-          setUser({ email, token, name });
-
-          // Redirect to the user page
+          // Redirecionar para o user-page
           navigate('/user-page');
         } else {
           setErrorMessage('Failed to login. Please try again.');

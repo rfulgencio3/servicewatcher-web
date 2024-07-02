@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from '../context/AuthContext';
 import './Login.scss';
 
-const Login = ({ setUser }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,20 +32,18 @@ const Login = ({ setUser }) => {
         const data = await response.json();
         const { token, name } = data;
 
-        // Armazenar o email, token e o nome do usuário no localStorage
-        localStorage.setItem('user', JSON.stringify({ email, token, name }));
-
         // Atualizar o estado global
-        setUser({ email, token, name });
+        login({ email, token, name });
 
         // Redirecionar para o user-page
         navigate('/user-page');
       } else {
-        setError('User or password is incorrect');
+        const errorData = await response.text();
+        setError(`Login failed: ${errorData}`);
       }
     } catch (error) {
       console.error('Login error:', error);
-      setError('Failed to login. Please try again.');
+      setError('Failed to fetch');
     } finally {
       setLoading(false);
     }

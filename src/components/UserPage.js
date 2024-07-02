@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import './UserPage.scss';
 
 const UserPage = () => {

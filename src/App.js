@@ -11,12 +11,13 @@ import UserPage from './components/UserPage';
 import PlanInfo from './components/PlanInfo'; 
 import Dashboard from './components/Dashboard';
 import ManageServices from './components/ManageServices';
+import SuccessPage from './components/SuccessPage';
 import './styles/main.scss';
 import logo from './assets/images/logo.png';
 import { AuthContext } from './context/AuthContext';
 
 function App() {
-  const { user, customer, loading, logout } = useContext(AuthContext);
+  const { user, loading, logout } = useContext(AuthContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,6 +76,7 @@ function App() {
           <Route path="/plan-info" element={user ? <PlanInfo user={user} /> : <Login />} />
           <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Login />} />
           <Route path="/manage-services" element={user ? <ManageServices user={user} /> : <Login />} />
+          <Route path="/success" element={<SuccessPage />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

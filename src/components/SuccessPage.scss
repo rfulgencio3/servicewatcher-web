@@ -1,0 +1,41 @@
+@import '../styles/_variables';
+
+.success-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  p {
+    color: $primary-color;
+    font-size: 1.25rem;
+  }
+
+  a {
+    color: $secondary-color;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    background-color: $secondary-color;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+}

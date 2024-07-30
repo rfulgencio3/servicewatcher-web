@@ -86,8 +86,8 @@ const PlanInfo = ({ user }) => {
               return (
                 <tr key={index} className={isActive ? 'active' : 'inactive'}>
                   <td>{plan.planName}</td>
-                  <td>{plan.planDescription}</td>
-                  <td>${plan.planPrice}</td>
+                  <td>{plan.description}</td>
+                  <td>${plan.price}</td>
                   <td>{new Date(plan.startDate).toLocaleDateString()}</td>
                   <td>{new Date(plan.endDate).toLocaleDateString()}</td>
                   <td className={`plan-status ${isActive ? 'active' : 'inactive'}`}>

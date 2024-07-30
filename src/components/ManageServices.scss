@@ -60,6 +60,10 @@
     box-sizing: border-box;
     font-size: 1rem;
     font-family: 'YourFontFamilyName', Arial, sans-serif;
+
+    &.input-error {
+      border-color: red;
+    }
   }
 
   .add-button {
@@ -222,5 +226,40 @@
     color: red;
     margin-top: 0.5rem;
     font-weight: bold;
+  }
+
+  .url-error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  .add-service-button {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background-color: darken(#28a745, 10%);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(#28a745, 0.5);
+    }
   }
 }

@@ -24,16 +24,23 @@ const UserPage = () => {
 
         if (response.ok) {
           const planData = await response.json();
+          console.log('Plan data:', planData); // Log dos dados do plano
+
           setHasPlan(planData && planData.length > 0);
 
-          // Verificar se o plano é inativo
-          const today = new Date();
-          const inactive = planData.some(plan => !plan.isActive || new Date(plan.endDate) < today);
+          // Verificar se o plano é inativo com base na data de término
+          const today = new Date().setHours(0, 0, 0, 0);
+          const inactive = planData.every(plan => new Date(plan.endDate).setHours(0, 0, 0, 0) < today);
+          console.log('Inactive:', inactive); // Log dos planos ativos
+
           setInactivePlan(inactive);
         } else {
+          const errorText = await response.text();
+          console.log('Failed to fetch plan details:', errorText);
           setHasPlan(false);
         }
       } catch (error) {
+        console.log('Error fetching plan details:', error);
         setHasPlan(false);
       } finally {
         setIsLoading(false);
